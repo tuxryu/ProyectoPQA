@@ -10,8 +10,8 @@ import java.util.Optional;
 import java.util.UUID;
 import mx.edu.uacm.is.slt.as.sistpolizas.AuxiliarF.Convertir;
 
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Beneficiario;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.IdBeneficiario;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Beneficiario;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.IdBeneficiario;
 import mx.edu.uacm.is.slt.as.sistpolizas.service.BeneficiarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

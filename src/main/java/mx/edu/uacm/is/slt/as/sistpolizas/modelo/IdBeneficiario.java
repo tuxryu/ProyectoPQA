@@ -82,3 +82,4 @@ public class IdBeneficiario implements Serializable {
             && Objects.equals(clavePoliza, other.clavePoliza);
     }
 }
+
