@@ -1,15 +1,18 @@
 package mx.edu.uacm.is.slt.as.sistpolizas.apiClient;
 
 import java.util.List;
+
+import mx.edu.uacm.is.slt.as.sistpolizas.httpClient.BeneficiarioHttpClient;
 import mx.edu.uacm.is.slt.as.sistpolizas.httpClient.ClienteHttpClient;
 import mx.edu.uacm.is.slt.as.sistpolizas.httpClient.PolizaHttpClient;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Cliente;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Cliente;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Poliza;
 
 public class ApiClient {
 
     protected ClienteHttpClient clienteHttpClient;
     protected PolizaHttpClient polizaHttpClient;
+    protected BeneficiarioHttpClient beneficiarioHttpClient;
 
     public ApiClient() {
     }
@@ -25,13 +28,12 @@ public class ApiClient {
     public List<Poliza> getPolizas() throws Exception {
         return polizaHttpClient.getPolizas();
     }
-    
+
     public Poliza getByClave(String clave) throws Exception{
         return polizaHttpClient.getPolizaByClave(clave);
     }
-    
+
     public Poliza agregarPoliza(Poliza poliza) throws Exception{
         return polizaHttpClient.agregarPoliza(poliza);
     }
-
 }
