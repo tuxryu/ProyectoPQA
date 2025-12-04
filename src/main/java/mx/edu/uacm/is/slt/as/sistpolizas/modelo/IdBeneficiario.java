@@ -12,25 +12,25 @@ public class IdBeneficiario implements Serializable {
     private String primerApellido;
     private String segundoApellido;
     private LocalDate fechaNacimiento;
-    private String poliza;
+    private String clavePoliza;
 
     public IdBeneficiario() {
     }
 
-    public IdBeneficiario(String nombres, String primerApellido, String segundoApellido, LocalDate fechaNacimiento, String poliza) {
+    public IdBeneficiario(String nombres, String primerApellido, String segundoApellido, LocalDate fechaNacimiento, String clavePoliza) {
         this.nombres = nombres;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.fechaNacimiento = fechaNacimiento;
-        this.poliza = poliza;
+        this.clavePoliza = clavePoliza;
     }
 
     public String getNombres() {
         return nombres;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setNombre(String nombre) {
+        this.nombres = nombre;
     }
 
     public String getPrimerApellido() {
@@ -57,52 +57,28 @@ public class IdBeneficiario implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public String getPoliza() {
-        return poliza;
+    public String getClavePoliza() {
+        return clavePoliza;
     }
 
-    public void setPoliza(String poliza) {
-        this.poliza = poliza;
+    public void setClavePoliza(String clavePoliza) {
+        this.clavePoliza = clavePoliza;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.nombres);
-        hash = 67 * hash + Objects.hashCode(this.primerApellido);
-        hash = 67 * hash + Objects.hashCode(this.segundoApellido);
-        hash = 67 * hash + Objects.hashCode(this.fechaNacimiento);
-        hash = 67 * hash + Objects.hashCode(this.poliza);
-        return hash;
+        return Objects.hash(nombres, primerApellido, segundoApellido, fechaNacimiento, clavePoliza);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final IdBeneficiario other = (IdBeneficiario) obj;
-        if (!Objects.equals(this.nombres, other.nombres)) {
-            return false;
-        }
-        if (!Objects.equals(this.primerApellido, other.primerApellido)) {
-            return false;
-        }
-        if (!Objects.equals(this.segundoApellido, other.segundoApellido)) {
-            return false;
-        }
-        if (!Objects.equals(this.poliza, other.poliza)) {
-            return false;
-        }
-        return Objects.equals(this.fechaNacimiento, other.fechaNacimiento);
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        IdBeneficiario other = (IdBeneficiario) obj;
+        return Objects.equals(nombres, other.nombres)
+            && Objects.equals(primerApellido, other.primerApellido)
+            && Objects.equals(segundoApellido, other.segundoApellido)
+            && Objects.equals(fechaNacimiento, other.fechaNacimiento)
+            && Objects.equals(clavePoliza, other.clavePoliza);
     }
-
-
-
 }
