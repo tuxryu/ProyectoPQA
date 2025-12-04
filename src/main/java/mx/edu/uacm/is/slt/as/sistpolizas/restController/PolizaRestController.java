@@ -1,5 +1,4 @@
-package mx.edu.uacm.is.slt.as.sistpolizas.RestController;
-
+package mx.edu.uacm.is.slt.as.sistpolizas.restController;
 import java.text.ParseException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,7 +7,7 @@ import  java.util.List;
 import java.util.Optional;
 import mx.edu.uacm.is.slt.as.sistpolizas.AuxiliarF.Convertir;
 
-import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Poliza;
+import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
 import mx.edu.uacm.is.slt.as.sistpolizas.service.PolizaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,7 +28,7 @@ public class PolizaRestController {
     public PolizaRestController() {
     }
     
-    @GetMapping("/polizas")
+    @GetMapping("/polizas/{clave}")
     public List<Poliza> getPolizas(){
        return polizaService.getPolizas();
     }
@@ -74,7 +73,12 @@ public class PolizaRestController {
         return polizaService.getPolizasByBeneficiariosFechaNacimiento(fechaNacimientoBeneficiario);
     }
     
-    @PostMapping("/{clave}/{tipo}/{monto}/{descripcion}/{curpCliente}")
+    /*@PostMapping("poliza/{clave}/{tipo}/{monto}/{descripcion}/{curpCliente}")
+    public Optional<Poliza> agregarPoliza(@RequestBody Poliza poliza){
+        return polizaService.agregarPoliza(poliza);
+    }*/
+    
+    @PostMapping("/poliza")
     public Optional<Poliza> agregarPoliza(@RequestBody Poliza poliza){
         return polizaService.agregarPoliza(poliza);
     }

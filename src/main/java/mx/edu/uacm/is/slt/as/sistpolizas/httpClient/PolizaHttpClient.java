@@ -10,8 +10,8 @@ import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.List;
 import mx.edu.uacm.is.slt.as.sistpolizas.AuxiliarF.Convertir;
-import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Cliente;
-import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Poliza;
+import mx.edu.uacm.is.slt.as.sistpolizas.model.Cliente;
+import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
 
 public class PolizaHttpClient {
         private String rutaBase;
@@ -43,7 +43,7 @@ public class PolizaHttpClient {
     }
 
     public List<Poliza> agregarPolizas(List<Poliza> polizas) throws Exception {
-    // Convertimos la lista de pÃ³lizas a JSON
+    // Convertimos la lista de pólizas a JSON
     String jsonBody = mapper.writeValueAsString(polizas);
 
     HttpRequest request = HttpRequest.newBuilder()
@@ -59,37 +59,33 @@ public class PolizaHttpClient {
         JavaType tipoLista = mapper.getTypeFactory().constructCollectionType(List.class, Poliza.class);
         return mapper.readValue(respuesta.body(), tipoLista);
     } else {
-        System.out.println("Error al agregar pÃ³lizas: " + respuesta.statusCode());
+        System.out.println("Error al agregar pólizas: " + respuesta.statusCode());
         return null;
     }
     
 }
     
     // POST: /poliza/{clave}/{tipo}/{monto}/{descripcion}/{curpCliente}
+
 public Poliza agregarPoliza(Poliza poliza) throws Exception {
-    String jsonBody = mapper.writeValueAsString(poliza);
+        String jsonBody = mapper.writeValueAsString(poliza);
 
-    HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(rutaBase + "/poliza/" 
-                + poliza.getClave() + "/"
-                + poliza.getTipo() + "/"
-                + poliza.getMonto() + "/"
-                + Convertir.espaciosAGuion(poliza.getDescripcion()) + "/"
-                + poliza.getCurpCliente()))
-            .header("Content-Type", "application/json")
-            .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-            .build();
+        // CORRECCIÓN: Usamos una ruta limpia "/poliza" y enviamos todo en el JSON
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(rutaBase + "/poliza")) 
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+                .build();
 
-    HttpResponse<String> respuesta = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> respuesta = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-    if (respuesta.statusCode() == 200 || respuesta.statusCode() == 201) {
-        return mapper.readValue(respuesta.body(), Poliza.class);
-    } else {
-        System.out.println("Error al agregar pÃ³liza: " + respuesta.statusCode());
-        return null;
-    }
-}
-
+        if (respuesta.statusCode() == 200 || respuesta.statusCode() == 201) {
+            return mapper.readValue(respuesta.body(), Poliza.class);
+        } else {
+            System.out.println("Error al agregar póliza (" + respuesta.statusCode() + "): " + respuesta.body());
+            return null;
+        }
+ }
     // GET: /cliente/{curp}
     public Poliza getPolizaByClave(String clave) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
@@ -103,7 +99,7 @@ public Poliza agregarPoliza(Poliza poliza) throws Exception {
             String json = respuesta.body();
             String body = respuesta.body();
             if (body == null || body.isBlank()) {
-                System.out.println("Respuesta vacÃ­a: cliente no encontrado");
+                System.out.println("Respuesta vacía: cliente no encontrado");
                 return null;
             }
             return mapper.readValue(json, Poliza.class);
