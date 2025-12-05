@@ -3,6 +3,7 @@ package mx.edu.uacm.is.slt.as.sistpolizas.modelo; // (Revisa que tu paquete sea 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class Poliza {
@@ -25,19 +26,32 @@ public class Poliza {
         this.descripcion = descripcion;
         this.curpCliente = curpCliente;
     }
-
-    public boolean compare(Poliza poliza){
-        return this.clave.equals(poliza.clave) && this.tipo == poliza.tipo && this.monto == poliza.monto && this.descripcion.equals(poliza.descripcion) && this.curpCliente.equals(poliza.curpCliente);
+    public Poliza(boolean existe) {
+        this.clave = null;
+        this.tipo = 0;
+        this.monto = 0;
+        this.descripcion = null;
+        this.curpCliente = null;
     }
+
+    public boolean compare(Poliza poliza) {
+        return Objects.equals(this.clave, poliza.clave)
+                && this.tipo == poliza.tipo
+                && this.monto == poliza.monto
+                && Objects.equals(this.descripcion, poliza.descripcion)
+                && Objects.equals(this.curpCliente, poliza.curpCliente);
+    }
+
+    
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.clave);
-        hash = 89 * hash + this.tipo;
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.monto) ^ (Double.doubleToLongBits(this.monto) >>> 32));
-        hash = 89 * hash + Objects.hashCode(this.descripcion);
-        hash = 89 * hash + Objects.hashCode(this.curpCliente);
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.clave);
+        hash = 23 * hash + this.tipo;
+        hash = 23 * hash + (int) (Double.doubleToLongBits(this.monto) ^ (Double.doubleToLongBits(this.monto) >>> 32));
+        hash = 23 * hash + Objects.hashCode(this.descripcion);
+        hash = 23 * hash + Objects.hashCode(this.curpCliente);
         return hash;
     }
 
@@ -59,13 +73,13 @@ public class Poliza {
         if (Double.doubleToLongBits(this.monto) != Double.doubleToLongBits(other.monto)) {
             return false;
         }
-        if (!Objects.equals(this.clave, other.clave)) {
-            return false;
-        }
         if (!Objects.equals(this.descripcion, other.descripcion)) {
             return false;
         }
-        return Objects.equals(this.curpCliente, other.curpCliente);
+        if (!Objects.equals(this.curpCliente, other.curpCliente)) {
+            return false;
+        }
+        return Objects.equals(this.clave, other.clave);
     }
 
 

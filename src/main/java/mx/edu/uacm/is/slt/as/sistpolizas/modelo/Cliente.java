@@ -1,26 +1,46 @@
 package mx.edu.uacm.is.slt.as.sistpolizas.modelo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Entity
+@Table(name = "clientes")
 public class Cliente {
 
     @Id
     private String curp;
+
     private String nombres;
+
     private String primerApellido;
+
     private String segundoApellido;
+
     private String direccion;
-    private String fechaNacimiento;
+    
+@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+private OffsetDateTime fechaNacimiento;
 
-    // Constructor
-
+    
     public Cliente() {
     }
+    
+    public Cliente(boolean existe) {
+        this.nombres = null;
+        this.primerApellido = null;
+        this.segundoApellido = null;
+        this.direccion = null;
+        this.curp = null;
+        this.fechaNacimiento = null;    
+    }
 
-    public Cliente(String nombres, String primerApellido, String segundoApellido, String direccion, String curp, String fechaNacimiento) {
+    public Cliente(String nombres, String primerApellido, String segundoApellido, String direccion, String curp, OffsetDateTime fechaNacimiento) {
         this.nombres = nombres;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
@@ -28,56 +48,52 @@ public class Cliente {
         this.curp = curp;
         this.fechaNacimiento = fechaNacimiento;
     }
+    
+    public Cliente(String nombres, String primerApellido, String direccion, String curp, OffsetDateTime fechaNacimiento) {
+        this.nombres = nombres;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = null;
+        this.direccion = direccion;
+        this.curp = curp;
+        this.fechaNacimiento = fechaNacimiento;
+    }    
 
-    public boolean compare(Cliente cliente){
-        return this.curp.equals(cliente.curp) && this.nombres.equals(cliente.nombres) && this.primerApellido.equals(cliente.primerApellido) && this.segundoApellido.equals(cliente.segundoApellido) && this.fechaNacimiento.equals(cliente.fechaNacimiento) && this.direccion.equals(cliente.direccion);
+    public boolean compare(Cliente cliente) {
+        return this.curp.equals(cliente.curp)
+            && this.nombres.equals(cliente.nombres)
+            && this.primerApellido.equals(cliente.primerApellido)
+            && this.segundoApellido.equals(cliente.segundoApellido)
+            && this.fechaNacimiento.equals(cliente.fechaNacimiento)
+            && this.direccion.equals(cliente.direccion);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + Objects.hashCode(this.curp);
-        hash = 73 * hash + Objects.hashCode(this.nombres);
-        hash = 73 * hash + Objects.hashCode(this.primerApellido);
-        hash = 73 * hash + Objects.hashCode(this.segundoApellido);
-        hash = 73 * hash + Objects.hashCode(this.direccion);
-        hash = 73 * hash + Objects.hashCode(this.fechaNacimiento);
-        return hash;
+        return Objects.hash(curp, nombres, primerApellido, segundoApellido, direccion, fechaNacimiento);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cliente other = (Cliente) obj;
-        if (!Objects.equals(this.curp, other.curp)) {
-            return false;
-        }
-        if (!Objects.equals(this.nombres, other.nombres)) {
-            return false;
-        }
-        if (!Objects.equals(this.primerApellido, other.primerApellido)) {
-            return false;
-        }
-        if (!Objects.equals(this.segundoApellido, other.segundoApellido)) {
-            return false;
-        }
-        if (!Objects.equals(this.direccion, other.direccion)) {
-            return false;
-        }
-        return Objects.equals(this.fechaNacimiento, other.fechaNacimiento);
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Cliente other = (Cliente) obj;
+        return Objects.equals(curp, other.curp)
+            && Objects.equals(nombres, other.nombres)
+            && Objects.equals(primerApellido, other.primerApellido)
+            && Objects.equals(segundoApellido, other.segundoApellido)
+            && Objects.equals(direccion, other.direccion)
+            && Objects.equals(fechaNacimiento, other.fechaNacimiento);
     }
 
+    // Getters y setters
+    public String getCurp() {
+        return curp;
+    }
 
+    public void setCurp(String curp) {
+        this.curp = curp;
+    }
 
-    // Getters y Setters
     public String getNombres() {
         return nombres;
     }
@@ -110,20 +126,11 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public String getCurp() {
-        return curp;
-    }
-
-    public void setCurp(String curp) {
-        this.curp = curp;
-    }
-
-    public String getFechaNacimiento() {
+    public OffsetDateTime getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
+    public void setFechaNacimiento(OffsetDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-
 }

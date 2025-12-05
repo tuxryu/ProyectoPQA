@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clientes - Sistema Pólizas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .navbar-custom {
+        background-color: #0d6efd; /* azul Bootstrap */
+      }
+      .navbar-custom .nav-link,
+      .navbar-custom .navbar-brand {
+        color: white;
+      }
+      .navbar-custom .nav-link:hover,
+      .navbar-custom .navbar-brand:hover {
+        color: #ffc107; /* amarillo Bootstrap */
+      }
+    </style>
+  </head>
+  <body class="p-4">
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <header class="container-fluid">
+        <a class="navbar-brand" href="#">Sistema de Pólizas</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/clientes">Clientes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/polizas">Pólizas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/beneficiarios">Beneficiarios</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+    </nav>
+
+    <ul class="nav nav-tabs" id="clienteTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="consulta-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#consulta"
+          type="button"
+          role="tab"
+          aria-controls="consulta"
+          aria-selected="true"
+        >
+          Consultar por CURP
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="registro-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#registro"
+          type="button"
+          role="tab"
+          aria-controls="registro"
+          aria-selected="false"
+        >
+          Registrar Cliente
+        </button>
+      </li>
+      <!-- <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="registro-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#actualizacion"
+          type="button"
+          role="tab"
+          aria-controls="actualizacion"
+          aria-selected="false"
+        >
+          Actualizar Cliente
+        </button>
+      </li> -->
+    </ul>
+
+    <div class="tab-content mt-3" id="clienteTabsContent">
+      <!-- Pestaña de Consulta -->
+      <div
+        class="tab-pane fade show active"
+        id="consulta"
+        role="tabpanel"
+        aria-labelledby="consulta-tab"
+      >
+        <form action="/clientes/consultar" method="post" class="mb-3">
+          <div class="mb-3">
+            <label for="curp" class="form-label">CURP del cliente</label>
+            <input
+              type="text"
+              name="curp"
+              id="curp"
+              class="form-control"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+
+        <!-- Tabla de resultados (rellena dinámicamente con Thymeleaf, JSP o tu motor de plantillas) -->
+      </div>
+
+      <!-- Pestaña de Registro -->
+      <div
+        class="tab-pane fade"
+        id="registro"
+        role="tabpanel"
+        aria-labelledby="registro-tab"
+      >
+        <form action="/clientes/registrar" method="post">
+          <div class="mb-3">
+            <label for="curpReg" class="form-label">CURP</label>
+            <input
+              type="text"
+              class="form-control"
+              id="curpReg"
+              name="curp"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha de Nacimiento</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fecha"
+              name="fecha"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="nombres" class="form-label">Nombres</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombres"
+              name="nombres"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="primerApellido" class="form-label"
+              >Primer Apellido</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="primerApellido"
+              name="primerApellido"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="segundoApellido" class="form-label"
+              >Segundo Apellido</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="segundoApellido"
+              name="segundoApellido"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <textarea
+              class="form-control"
+              id="direccion"
+              name="direccion"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Registrar</button>
+        </form>
+      </div>
+
+      <!-- Pestaña de Actualizacion -->
+      <!-- <div
+        class="tab-pane fade"
+        id="actualizacion"
+        role="tabpanel"
+        aria-labelledby="actualizacion-tab"
+      >
+        <form action="/clientes/actualizacion" method="post">
+          <div class="mb-3">
+            <label for="curpAct" class="form-label">CURP</label>
+            <input
+              type="text"
+              class="form-control"
+              id="curpAct"
+              name="curp"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha de Nacimiento</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fecha"
+              name="fecha"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="nombres" class="form-label">Nombres</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombres"
+              name="nombres"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="primerApellido" class="form-label"
+              >Primer Apellido</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="primerApellido"
+              name="primerApellido"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="segundoApellido" class="form-label"
+              >Segundo Apellido</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="segundoApellido"
+              name="segundoApellido"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <textarea
+              class="form-control"
+              id="direccion"
+              name="direccion"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Registrar</button>
+        </form>
+      </div> -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

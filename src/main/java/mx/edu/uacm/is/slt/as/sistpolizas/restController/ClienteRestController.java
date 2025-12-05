@@ -32,7 +32,8 @@ public class ClienteRestController {
         return clienteService.getClientes();
     }
     
-    @PostMapping({"/cliente/{curp}/{direccion}/{fecha_nacimiento}/{nombres}/{primerApellido}/{segundoApellido}", "/cliente/{curp}/{direccion}/{fecha_nacimiento}/{nombres}/{primerApellido}"})
+    
+    @PostMapping("/cliente")
     public Optional<Cliente> agregarCliente(@RequestBody Cliente cliente){
         return clienteService.agregarCliente(cliente);
     }

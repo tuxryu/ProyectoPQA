@@ -12,7 +12,7 @@ public class Convertir {
         try {
             return OffsetDateTime.parse(fechaStr, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         } catch (DateTimeParseException e) {
-            System.err.println(" Formato de fecha y hora inválido: " + fechaStr);
+            System.err.println(" Formato de fecha y hora invalido: " + fechaStr);
             return null;
         }
     }
@@ -20,14 +20,14 @@ public class Convertir {
     /**
      * Convierte un String a int.
      *
-     * @param numeroStr la cadena con el número
+     * @param numeroStr la cadena con el nï¿½mero
      * @return int o 0 si hay error
      */
     public static int stringAInt(String numeroStr) {
         try {
             return Integer.parseInt(numeroStr);
         } catch (NumberFormatException e) {
-            System.err.println("Número entero inválido: " + numeroStr);
+            System.err.println("Numero entero invalido: " + numeroStr);
             return 0;
         }
     }
@@ -35,14 +35,14 @@ public class Convertir {
     /**
      * Convierte un String a float.
      *
-     * @param numeroStr la cadena con el número
+     * @param numeroStr la cadena con el nï¿½mero
      * @return float o 0.0f si hay error
      */
     public static float stringAFloat(String numeroStr) {
         try {
             return Float.parseFloat(numeroStr);
         } catch (NumberFormatException e) {
-            System.err.println("Número decimal inválido: " + numeroStr);
+            System.err.println("Numero decimal invalido: " + numeroStr);
             return 0.0f;
         }
     }
@@ -57,7 +57,7 @@ public class Convertir {
         try {
             return UUID.fromString(uuidStr);
         } catch (IllegalArgumentException e) {
-            System.err.println("UUID inválido: " + uuidStr);
+            System.err.println("UUID invalido: " + uuidStr);
             return null;
         }
     }

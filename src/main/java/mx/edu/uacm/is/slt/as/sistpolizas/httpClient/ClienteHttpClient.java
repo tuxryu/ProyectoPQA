@@ -71,12 +71,7 @@ public class ClienteHttpClient {
         String jsonBody = mapper.writeValueAsString(cliente);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(rutaBase + "/cliente/" + cliente.getCurp() + "/"
-                        + Convertir.espaciosAGuion(cliente.getDireccion()) + "/"
-                        + cliente.getFechaNacimiento() + "/"
-                        + cliente.getNombres() + "/"
-                        + cliente.getPrimerApellido() + "/"
-                        + cliente.getSegundoApellido()))
+                .uri(URI.create(rutaBase + "/cliente"))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
@@ -86,7 +81,7 @@ public class ClienteHttpClient {
         if (respuesta.statusCode() == 200 || respuesta.statusCode() == 201) {
             return mapper.readValue(respuesta.body(), Cliente.class);
         } else {
-            System.out.println("Error al agregar cliente: " + respuesta.statusCode());
+            System.out.println("Error al agregar cliente (" + respuesta.statusCode() + "): " + respuesta.body());
             return null;
         }
     }

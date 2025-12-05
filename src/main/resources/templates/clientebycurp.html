@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clientes - Sistema Pólizas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .navbar-custom {
+        background-color: #0d6efd; /* azul Bootstrap */
+      }
+      .navbar-custom .nav-link,
+      .navbar-custom .navbar-brand {
+        color: white;
+      }
+      .navbar-custom .nav-link:hover,
+      .navbar-custom .navbar-brand:hover {
+        color: #ffc107; /* amarillo Bootstrap */
+      }
+    </style>
+  </head>
+  <body class="p-4">
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <header class="container-fluid">
+        <a class="navbar-brand" href="#">Sistema de Pólizas</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/Inicio">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/clientes">Clientes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/polizas">Pólizas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/beneficiarios">Beneficiarios</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+    </nav>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>CURP</th>
+          <th>Nombres</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>Dirección</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td th:text="${cliente.curp}"></td>
+          <td th:text="${cliente.nombres}"></td>
+          <td th:text="${cliente.primerApellido}"></td>
+          <td th:text="${cliente.segundoApellido}"></td>
+          <td th:text="${cliente.direccion}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div th:if="${cliente.curp == null}">
+      <p class="text-danger">
+        El cliente no existe o no tiene póliza asociada.
+      </p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

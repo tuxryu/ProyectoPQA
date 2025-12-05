@@ -10,8 +10,8 @@ import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.List;
 import mx.edu.uacm.is.slt.as.sistpolizas.AuxiliarF.Convertir;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Cliente;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Cliente;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Poliza;
 
 public class PolizaHttpClient {
         private String rutaBase;
@@ -43,7 +43,7 @@ public class PolizaHttpClient {
     }
 
     public List<Poliza> agregarPolizas(List<Poliza> polizas) throws Exception {
-    // Convertimos la lista de pólizas a JSON
+    // Convertimos la lista de polizas a JSON
     String jsonBody = mapper.writeValueAsString(polizas);
 
     HttpRequest request = HttpRequest.newBuilder()
@@ -59,7 +59,7 @@ public class PolizaHttpClient {
         JavaType tipoLista = mapper.getTypeFactory().constructCollectionType(List.class, Poliza.class);
         return mapper.readValue(respuesta.body(), tipoLista);
     } else {
-        System.out.println("Error al agregar pólizas: " + respuesta.statusCode());
+        System.out.println("Error al agregar polizas: " + respuesta.statusCode());
         return null;
     }
     
@@ -70,7 +70,7 @@ public class PolizaHttpClient {
 public Poliza agregarPoliza(Poliza poliza) throws Exception {
         String jsonBody = mapper.writeValueAsString(poliza);
 
-        // CORRECCIÓN: Usamos una ruta limpia "/poliza" y enviamos todo en el JSON
+        // CORRECCIï¿½N: Usamos una ruta limpia "/poliza" y enviamos todo en el JSON
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(rutaBase + "/poliza")) 
                 .header("Content-Type", "application/json")
@@ -82,7 +82,7 @@ public Poliza agregarPoliza(Poliza poliza) throws Exception {
         if (respuesta.statusCode() == 200 || respuesta.statusCode() == 201) {
             return mapper.readValue(respuesta.body(), Poliza.class);
         } else {
-            System.out.println("Error al agregar póliza (" + respuesta.statusCode() + "): " + respuesta.body());
+            System.out.println("Error al agregar poliza (" + respuesta.statusCode() + "): " + respuesta.body());
             return null;
         }
  }
@@ -99,7 +99,7 @@ public Poliza agregarPoliza(Poliza poliza) throws Exception {
             String json = respuesta.body();
             String body = respuesta.body();
             if (body == null || body.isBlank()) {
-                System.out.println("Respuesta vacía: cliente no encontrado");
+                System.out.println("Respuesta vacia: cliente no encontrado");
                 return null;
             }
             return mapper.readValue(json, Poliza.class);

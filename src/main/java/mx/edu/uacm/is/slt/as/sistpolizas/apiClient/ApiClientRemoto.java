@@ -4,9 +4,9 @@ package mx.edu.uacm.is.slt.as.sistpolizas.apiClient;
 import java.util.ArrayList;
 import java.util.List;
 import mx.edu.uacm.is.slt.as.sistpolizas.httpClient.*;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Beneficiario;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Cliente;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Beneficiario;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Cliente;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Poliza;
 
 public class ApiClientRemoto extends ApiClient{
 

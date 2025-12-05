@@ -1,4 +1,4 @@
-package mx.edu.uacm.is.slt.as.sistpolizas.model;
+package mx.edu.uacm.is.slt.as.sistpolizas.modelo;
 
 import jakarta.persistence.*;
 

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pólizas - Sistema Pólizas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .navbar-custom {
+        background-color: #0d6efd;
+      }
+      .navbar-custom .nav-link,
+      .navbar-custom .navbar-brand {
+        color: white;
+      }
+      .navbar-custom .nav-link:hover,
+      .navbar-custom .navbar-brand:hover {
+        color: #ffc107;
+      }
+    </style>
+  </head>
+  <body class="p-4">
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <header class="container-fluid">
+        <a class="navbar-brand" href="#">Sistema de Pólizas</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/clientes">Clientes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/polizas">Pólizas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/beneficiarios">Beneficiarios</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+    </nav>
+
+    <ul class="nav nav-tabs" id="polizaTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="consulta-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#consulta"
+          type="button"
+          role="tab"
+          aria-controls="consulta"
+          aria-selected="true"
+        >
+          Consultar por Clave
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="registro-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#registro"
+          type="button"
+          role="tab"
+          aria-controls="registro"
+          aria-selected="false"
+        >
+          Registrar Póliza
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="polizaTabsContent">
+      <!-- Consulta por clave -->
+      <div
+        class="tab-pane fade show active"
+        id="consulta"
+        role="tabpanel"
+        aria-labelledby="consulta-tab"
+      >
+        <form action="/polizas/consultar" method="post" class="mb-3">
+          <div class="mb-3">
+            <label for="clave" class="form-label">Clave de la póliza</label>
+            <input
+              type="text"
+              name="clave"
+              id="clave"
+              class="form-control"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+      </div>
+
+      <!-- Registro -->
+      <div
+        class="tab-pane fade"
+        id="registro"
+        role="tabpanel"
+        aria-labelledby="registro-tab"
+      >
+        <form action="/polizas/registrar" method="post">
+          <div class="mb-3">
+            <label for="claveReg" class="form-label">Clave</label>
+            <input
+              type="text"
+              class="form-control"
+              id="claveReg"
+              name="clave"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo</label>
+            <input
+              type="number"
+              class="form-control"
+              id="tipo"
+              name="tipo"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="monto" class="form-label">Monto</label>
+            <input
+              type="number"
+              step="0.01"
+              class="form-control"
+              id="monto"
+              name="monto"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea
+              class="form-control"
+              id="descripcion"
+              name="descripcion"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="curpCliente" class="form-label">CURP del Cliente</label>
+            <input
+              type="text"
+              class="form-control"
+              id="curpCliente"
+              name="curpCliente"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-success">Registrar</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

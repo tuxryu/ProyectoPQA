@@ -2,8 +2,8 @@ package mx.edu.uacm.is.slt.as.sistpolizas.repository;
 
 import java.time.OffsetDateTime;
 import java.util.Date;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Beneficiario;
-import mx.edu.uacm.is.slt.as.sistpolizas.model.IdBeneficiario;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Beneficiario;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.IdBeneficiario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +14,6 @@ public interface BeneficiarioRepository extends JpaRepository<Beneficiario, IdBe
     List<Beneficiario> findById_NombresAndId_PrimerApellidoAndId_SegundoApellido(String nombres, String primerApellido, String segundoApellido);
     List<Beneficiario> findById_NombresAndId_PrimerApellido(String nombres, String primerApellido);
     List<Beneficiario> findByIdFechaNacimiento(OffsetDateTime fechaNacimiento);
-//Buscar todos los beneficiarios de una póliza específica
+//Buscar todos los beneficiarios de una pï¿½liza especï¿½fica
     List<Beneficiario> findByPoliza_Clave(String clavePoliza);
 }

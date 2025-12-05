@@ -4,6 +4,9 @@ import jakarta.persistence.Embeddable;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.OffsetDateTime;
+
 
 @Embeddable
 public class IdBeneficiario implements Serializable {
@@ -11,13 +14,14 @@ public class IdBeneficiario implements Serializable {
     private String nombres;
     private String primerApellido;
     private String segundoApellido;
-    private LocalDate fechaNacimiento;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    private OffsetDateTime fechaNacimiento;
     private String clavePoliza;
 
     public IdBeneficiario() {
     }
 
-    public IdBeneficiario(String nombres, String primerApellido, String segundoApellido, LocalDate fechaNacimiento, String clavePoliza) {
+    public IdBeneficiario(String nombres, String primerApellido, String segundoApellido, OffsetDateTime fechaNacimiento, String clavePoliza) {
         this.nombres = nombres;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
@@ -49,11 +53,11 @@ public class IdBeneficiario implements Serializable {
         this.segundoApellido = segundoApellido;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public OffsetDateTime getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(OffsetDateTime fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 

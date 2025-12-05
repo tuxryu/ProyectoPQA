@@ -7,7 +7,7 @@ import  java.util.List;
 import java.util.Optional;
 import mx.edu.uacm.is.slt.as.sistpolizas.AuxiliarF.Convertir;
 
-import mx.edu.uacm.is.slt.as.sistpolizas.model.Poliza;
+import mx.edu.uacm.is.slt.as.sistpolizas.modelo.Poliza;
 import mx.edu.uacm.is.slt.as.sistpolizas.service.PolizaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
